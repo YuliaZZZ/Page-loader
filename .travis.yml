@@ -8,4 +8,4 @@ before_install:
   - pip install poetry
 
 script:
-  - make linty
+  - make lint
