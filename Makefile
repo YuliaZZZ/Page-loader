@@ -25,4 +25,4 @@ public:
 
 
 
-.PHONY : lint install test public
+.PHONY : install lint test public
