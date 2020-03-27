@@ -2,7 +2,7 @@
 import pytest
 from loader import engine
 import tempfile
-import filecmp
+import os
 
 
 def readed(file):
@@ -21,6 +21,7 @@ def compare(site):
 
 
 def test_answer():
+    file1 = engine.page_load('https://docs.python.org/3/', 'tests/fixtures')
     assert 'hexlet-io-courses.html' == engine.create_name_file('https://hexlet.io/courses')
-    assert  readed('tests/fixtures/docs-python-org-3-.html') == compare(
-        'https://docs.python.org/3/')
+    assert readed(file1) == compare('https://docs.python.org/3/')
+    os.unlink(file1)
