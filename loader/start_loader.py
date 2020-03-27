@@ -1,4 +1,4 @@
-import argparse
+import argparse    # pragma: no cover
 from loader import engine
 
 
