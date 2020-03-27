@@ -21,7 +21,7 @@ def compare(site):
 
 
 def test_answer():
-    file1 = engine.page_load('https://docs.python.org/3/', './tests/fixtures')
+    file = engine.page_load('https://docs.python.org/3/', './tests/fixtures')
     assert 'hexlet-io-courses.html' == engine.create_name_file('https://hexlet.io/courses')
-    assert readed(file1) == compare('https://docs.python.org/3/')
-    os.unlink(file1)
+    assert readed(file) == compare('https://docs.python.org/3/')
+    os.unlink(file)
