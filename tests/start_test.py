@@ -1,8 +1,6 @@
 # -*- coding:utf-8 -*-
 import pytest
 from loader import engine
-import tempfile
-import os
 
 
 def readed(file):
@@ -21,7 +19,4 @@ def compare(site):
 
 
 def test_answer():
-    file = engine.page_load('https://docs.python.org/3/', './tests/fixtures')
     assert 'hexlet-io-courses.html' == engine.create_name_file('https://hexlet.io/courses')
-    assert readed(file) == compare('https://docs.python.org/3/')
-    os.unlink(file)
