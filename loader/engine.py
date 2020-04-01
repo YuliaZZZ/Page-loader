@@ -1,20 +1,10 @@
-import re
-import requests
+from loader.created import page_load, create_name_file, create_catalog, load_files   # noqa E501
+from loader.file_conversion import change_html
 
 
-def create_name_file(site):
-    _, tail = site.split('://')
-    other_symbols = re.split('[\W|^.]', tail)  # noqa W605
-    name_file = '-'.join(other_symbols)
-    name_file += '.html'
-    return name_file
-
-
-def page_load(site, way):
-    r = requests.get(site)
-    r.encoding
-    new_file = way + '/' + create_name_file(site)
-    with open(new_file, 'wb') as fd:
-        for chunk in r.iter_content(chunk_size=45):
-            fd.write(chunk)
-    return new_file
+def app(site, way):
+    file1 = page_load(site, create_name_file(site, way))
+    catalog = create_catalog(file1)
+    items_src = change_html(file1, catalog)
+    load_files(items_src, catalog, site)
+    return file1
