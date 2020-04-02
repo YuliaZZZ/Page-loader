@@ -13,7 +13,7 @@ def create_name_file(site, way, head=0):
     elif head == 1:
         postfix = str(n.suffix)
         tail = tail[: -len(n.suffix)]
-    other_symbols = re.split('\W|\.', tail)
+    other_symbols = re.split('\W|\.', tail)   # noqa  W605
     name_file = way + '/' + '-'.join(other_symbols) + postfix
     return name_file
 
