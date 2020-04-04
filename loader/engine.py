@@ -6,5 +6,5 @@ def app(site, way):
     file1 = page_load(site, create_name_file(site, way))
     catalog = create_catalog(file1)
     items_src = change_html(file1, catalog)
-    load_files(items_src, catalog, site)
-    return file1
+    items_files = load_files(items_src, catalog, site)
+    return items_files

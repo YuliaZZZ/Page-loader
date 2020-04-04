@@ -1,5 +1,5 @@
 import argparse    # pragma: no cover
-from loader import engine
+from loader import engine  # pragma: no cover
 
 
 parser = argparse.ArgumentParser(description='Page loader')  # pragma: no cover

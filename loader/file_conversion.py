@@ -15,7 +15,12 @@ def change_html(html_file, catalog):
             elif i.name == 'link':
                 items_src.append(i['href'])
                 i['href'] = create_name_file(items_src[-1], catalog, head=1)
-    text = str(soup)
-    with open(html_file, 'w') as fp:
-        fp.write(text)
+    text = str(soup)   # pragma: no cover
+    write_content(html_file, text)    # pragma: no cover
     return items_src
+
+
+def write_content(file_, content):
+    with open(file_, 'w') as fp:
+        fp.write(content)
+    return file_
