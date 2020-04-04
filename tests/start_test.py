@@ -39,12 +39,14 @@ def test_answer():
     assert './_static-jquery.js' == created.create_name_file('./_static/jquery.js', '.', head=1)
     test_dir = tempfile.TemporaryDirectory()
     name_dir = test_dir.name
-    new_file = created.page_load('https://python-poetry.org', created.create_name_file('https://python-poetry.org', name_dir))
-    assert check_create_html('https://python-poetry.org') == readed(new_file)
+    new_file = created.page_load('https://learngitbranching.js.org/?locale=ru_RU',
+                                 created.create_name_file('https://learngitbranching.js.org/?locale=ru_RU',
+                                 name_dir))
+    assert check_create_html('https://learngitbranching.js.org/?locale=ru_RU') == readed(new_file)
     catalog = created.create_catalog(new_file)
     assert os.path.isdir(catalog) == True
     items_src = file_conversion.change_html(new_file, catalog)
-    assert check_src('https://python-poetry.org') == items_src
-    created.load_files(items_src, catalog, 'https://python-poetry.org')
-    assert os.listdir(name_dir) == check_load_files('https://python-poetry.org')
+    assert check_src('https://learngitbranching.js.org/?locale=ru_RU') == items_src
+    created.load_files(items_src, catalog, 'https://learngitbranching.js.org/?locale=ru_RU')
+    assert os.listdir(name_dir) == check_load_files('https://learngitbranching.js.org/?locale=ru_RU')
     assert readed(file_conversion.write_content(new_file, 'step')) == 'step'
