@@ -23,7 +23,7 @@ def check_src(site):
     dir_name = fd.name
     file1 = created.page_load(site, created.create_name_file(site, dir_name))
     c = created.create_catalog(file1)
-    result = file_conversion.change_html(file1, dir_name)
+    result = file_conversion.change_html(file1, dir_name, site)
     return result
 
 
@@ -45,8 +45,6 @@ def test_answer():
     assert check_create_html('https://learngitbranching.js.org/?locale=ru_RU') == readed(new_file)
     catalog = created.create_catalog(new_file)
     assert os.path.isdir(catalog) == True
-    items_src = file_conversion.change_html(new_file, catalog)
+    items_src = file_conversion.change_html(new_file, catalog, 'https://learngitbranching.js.org/?locale=ru_RU')
     assert check_src('https://learngitbranching.js.org/?locale=ru_RU') == items_src
-    created.load_files(items_src, catalog, 'https://learngitbranching.js.org/?locale=ru_RU')
     assert os.listdir(name_dir) == check_load_files('https://learngitbranching.js.org/?locale=ru_RU')
-    assert readed(file_conversion.write_content(new_file, 'step')) == 'step'
