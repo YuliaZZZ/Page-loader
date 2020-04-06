@@ -3,6 +3,7 @@ import pytest
 from loader import engine, created, file_conversion
 import tempfile
 import os
+import logging
 
 
 def readed(file):
@@ -27,10 +28,10 @@ def check_src(site):
     return result
 
 
-def check_load_files(site):
+def check_load_files(site, logslevel):
     fd = tempfile.TemporaryDirectory()
     dir_name = fd.name
-    engine.app(site, dir_name)
+    engine.app(site, dir_name, logslevel)
     files = os.listdir(dir_name)
     return files
 
@@ -47,4 +48,4 @@ def test_answer():
     assert os.path.isdir(catalog) == True
     items_src = file_conversion.change_html(new_file, catalog, 'https://learngitbranching.js.org/?locale=ru_RU')
     assert check_src('https://learngitbranching.js.org/?locale=ru_RU') == items_src
-    assert os.listdir(name_dir) == check_load_files('https://learngitbranching.js.org/?locale=ru_RU')
+    assert os.listdir(name_dir) == check_load_files('https://learngitbranching.js.org/?locale=ru_RU', logging.DEBUG)
