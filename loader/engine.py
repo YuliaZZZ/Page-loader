@@ -3,7 +3,8 @@ from loader.file_conversion import change_html
 import logging
 
 
-logging.basicConfig(filename='logsapp.log', format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s')
+logging.basicConfig(filename='logsapp.log',
+                    format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s')   # noqa E501
 
 
 def app(site, way, logslevel):

@@ -24,4 +24,4 @@ parser.add_argument('-l', '--log', default='info',
                     choices=['debug', 'info', 'warning', 'error', 'critical'],
                     help='logs registration level')
 args = parser.parse_args()     # pragma: no cover
-file_new = engine.app(args.site, args.output, turn(args.log))      # pragma: no cover
+file_new = engine.app(args.site, args.output, turn(args.log))
