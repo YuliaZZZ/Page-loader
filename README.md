@@ -7,3 +7,5 @@
 <a href="https://asciinema.org/a/313962"><img src="https://asciinema.org/a/lZmJKg3TT3BWqohxSOYhMjJvH.png" width="336"/></a>
 # Загрузка web-страницы в html файл и формирование каталога с ресурсами
  <a href="https://asciinema.org/a/315733"><img src="https://asciinema.org/a/lZmJKg3TT3BWqohxSOYhMjJvH.png" width="336"/></a>
+# Выбор пользователем уровня логирования программы
+<a href="https://asciinema.org/a/317251"><img src="https://asciinema.org/a/lZmJKg3TT3BWqohxSOYhMjJvH.png" width="336"/></a>
