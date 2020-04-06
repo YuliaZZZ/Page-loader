@@ -7,5 +7,5 @@
 <a href="https://asciinema.org/a/313962"><img src="https://asciinema.org/a/lZmJKg3TT3BWqohxSOYhMjJvH.png" width="336"/></a>
 # Создание каталога с локальными ресурсами web-страницы
  <a href="https://asciinema.org/a/315733"><img src="https://asciinema.org/a/lZmJKg3TT3BWqohxSOYhMjJvH.png" width="336"/></a>
-# Выбор уровня подробсти логирования программы
+# Выбор уровня подробности логирования программы
 <a href="https://asciinema.org/a/317251"><img src="https://asciinema.org/a/lZmJKg3TT3BWqohxSOYhMjJvH.png" width="336"/></a>
