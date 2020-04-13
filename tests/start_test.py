@@ -4,12 +4,13 @@ from loader import engine, created, file_conversion
 import tempfile
 import os
 import logging
+import warnings
 
 
-def check_load_files(site, logslevel):
+def check_load_files(site):
     fd = tempfile.TemporaryDirectory()
     dir_name = fd.name
-    engine.app(site, dir_name, logslevel)
+    engine.app(site, dir_name)
     files = os.listdir(dir_name)
     return files
 
@@ -25,5 +26,5 @@ def test_answer():
     assert os.path.isfile(new_file) == True
     catalog = created.create_catalog(new_file)
     assert os.path.isdir(catalog) == True
-    file_conversion.change_html(new_file, catalog, 'https://python-poetry.org')
-    assert os.listdir(name_dir) == check_load_files('https://python-poetry.org', logging.DEBUG)
+    items = file_conversion.change_html(new_file, catalog, 'https://python-poetry.org')
+    assert os.listdir(name_dir) == check_load_files('https://python-poetry.org')
