@@ -9,3 +9,5 @@
  <a href="https://asciinema.org/a/315733"><img src="https://asciinema.org/a/lZmJKg3TT3BWqohxSOYhMjJvH.png" width="336"/></a>
 # Выбор уровня подробности логирования программы
 <a href="https://asciinema.org/a/317251"><img src="https://asciinema.org/a/lZmJKg3TT3BWqohxSOYhMjJvH.png" width="336"/></a>
+# Обработка ошибок программы
+ <a href="https://asciinema.org/a/320148"><img src="https://asciinema.org/a/lZmJKg3TT3BWqohxSOYhMjJvH.png" width="336"/></a>
