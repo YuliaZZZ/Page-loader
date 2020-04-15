@@ -1,4 +1,4 @@
-from loader import engine, created   # noqa F401
+from loader import engine, created, change_files   # noqa F401
 
 
-__all__ = ('engine', 'created')
+__all__ = ('engine', 'created', 'change_files')

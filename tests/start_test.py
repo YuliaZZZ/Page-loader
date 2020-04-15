@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 import pytest
-from loader import engine, created
+from loader import engine, created, change_files
 import tempfile
 import os
 import logging
@@ -19,14 +19,14 @@ def test_modules():
     assert './static-jquery.html' == created.create_name_file('static/jquery', '.', head=1)
     test_dir = tempfile.TemporaryDirectory()
     name_dir = test_dir.name
-    new_file = engine.page_load('https://python-poetry.org',
-                                 created.create_name_file('https://python-poetry.org',
-                                 name_dir))
+    site = 'https://python-poetry.org'
+    new_file = created.page_load(site, created.create_name_file(site, name_dir))
     assert os.path.isfile(new_file) == True
-    catalog = engine.create_catalog(new_file)
+    catalog = created.create_catalog(new_file)
     assert os.path.isdir(catalog) == True
-    items = engine.change_html(new_file, catalog, 'https://python-poetry.org')
-    assert os.listdir(name_dir) == check_load_files('https://python-poetry.org')
+    items_src = change_files.change_html(new_file, catalog, site)
+    change_files.files_loader(items_src, catalog, site)
+    assert os.listdir(name_dir) == check_load_files(site)
 
 
 def test_exceptions():
