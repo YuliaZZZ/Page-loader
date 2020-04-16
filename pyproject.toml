@@ -1,12 +1,16 @@
 [tool.poetry]
 name = "YuliaZZZ_Page_Loader"
-version = "0.6.0"
+version = "0.7.0"
 description = "Page loader"
 classifiers = ["Topic :: Utilities"]
 authors = ["Zula <zinowiewa@yandex.ru>"]
 packages = [
   { include = "loader" },
   ]
+
+[[tool.poetry.source]] 
+name =  'private' 
+url =  'https://github.com/YuliaZZZ/python-project-lvl3'
 
 [tool.poetry.dependencies]
 python = "^3.6"

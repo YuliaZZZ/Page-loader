@@ -3,16 +3,21 @@ from loader.change_files import change_html, files_loader
 import logging
 import sys
 import requests
+from progress.spinner import Spinner
 
 
 class SomeException(Exception):   # pragma: no cover
     pass
 
 
+spinner = Spinner('Loading ')
+
+
 def app(site, way):
     logger.info('Start program!')
     try:
         file1 = page_load(site, create_name_file(site, way))
+        spinner.next()
     except requests.exceptions.InvalidSchema as e:
         logger.debug(sys.exc_info()[:2])
         logger.error('Ошибка параметров запроса.')
@@ -37,16 +42,20 @@ def app(site, way):
         raise SomeException() from e
     logger.info('File created!')
     catalog = create_catalog(file1)
+    spinner.next()
     logger.info('Catalog created!')
     items_src = change_html(file1, catalog, site)
+    spinner.next()
     logger.info('HTML changed!')
     try:
         files_loader(items_src, catalog, site)
+        spinner.next()
     except MemoryError as e:         # pragma: no cover
         logger.debug(sys.exc_info()[:2])
         logger.error('Недостаточно места на диске.')
         raise SomeException() from e
     logger.info('Files upload! The end')
+    spinner.finish()
     return file1
 
 

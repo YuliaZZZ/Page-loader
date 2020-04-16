@@ -19,7 +19,7 @@ def test_modules():
     assert './static-jquery.html' == created.create_name_file('static/jquery', '.', head=1)
     test_dir = tempfile.TemporaryDirectory()
     name_dir = test_dir.name
-    site = 'https://python-poetry.org'
+    site = 'https://python-poetry.org/docs/cli/'
     new_file = created.page_load(site, created.create_name_file(site, name_dir))
     assert os.path.isfile(new_file) == True
     catalog = created.create_catalog(new_file)
