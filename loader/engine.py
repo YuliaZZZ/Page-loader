@@ -1,13 +1,9 @@
+from loader.scripts.page_loader import logger, SomeException
 from loader.created import create_name_file, page_load, create_catalog
 from loader.file_conversion import change_html, files_loader
-import logging
-import sys
 import requests
 from progress.spinner import Spinner
-
-
-class SomeException(Exception):   # pragma: no cover
-    pass
+import sys
 
 
 spinner = Spinner('Loading ')
@@ -15,8 +11,10 @@ spinner = Spinner('Loading ')
 
 def app(site, way):
     logger.info('Start program!')
+    file_html = create_name_file(site, way)
+    spinner.next()
     try:
-        file1 = page_load(site, create_name_file(site, way))
+        page_load(site, file_html)
         spinner.next()
     except requests.exceptions.InvalidSchema as e:
         logger.debug(sys.exc_info()[:2])
@@ -41,11 +39,9 @@ def app(site, way):
         logger.error('Нет прав на внесение изменений.')
         raise SomeException() from e
     logger.info('File created!')
-    catalog = create_catalog(file1)
-    spinner.next()
+    catalog = create_catalog(file_html)
     logger.info('Catalog created!')
-    items_src = change_html(file1, catalog, site)
-    spinner.next()
+    items_src = change_html(file_html, catalog)
     logger.info('HTML changed!')
     try:
         files_loader(items_src, catalog, site)
@@ -56,29 +52,3 @@ def app(site, way):
         raise SomeException() from e
     logger.info('Files upload! The end')
     spinner.finish()
-    return file1
-
-
-logger = logging.getLogger(__name__)    # pragma: no cover
-logger.setLevel(logging.DEBUG)    # pragma: no cover
-
-
-def start_app(site, way, logslevel):   # pragma: no cover
-    f = logging.FileHandler('logsapp.log')
-    f.setLevel(logslevel)
-    formatter = logging.Formatter(
-        '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-        )
-    f.setFormatter(formatter)
-    logger.addHandler(f)
-    console = logging.StreamHandler()
-    console.setLevel(logging.ERROR)
-    formatter_console = logging.Formatter('%(message)s')
-    console.setFormatter(formatter_console)
-    logger.addHandler(console)
-    try:
-        app(site, way)
-    except SomeException:
-        sys.exit(1)
-    else:
-        sys.exit(0)

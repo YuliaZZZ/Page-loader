@@ -4,7 +4,7 @@ import os.path
 import re
 
 
-def change_html(html_file, catalog, site):
+def change_html(html_file, catalog):
     items_src = []
     with open(html_file) as fp:
         soup = BeautifulSoup(fp, 'xml')
@@ -13,7 +13,7 @@ def change_html(html_file, catalog, site):
             src=re.compile("^(?!https).+")) + soup.find_all(
                 'link',
                 href=re.compile("^(?!https).+")):
-            if i.name == 'src':
+            if i.name == 'script' or i.name == 'img':
                 items_src.append(i['src'])
                 i['src'] = create_name_file(items_src[-1], catalog, head=1)
             elif i.name == 'link':

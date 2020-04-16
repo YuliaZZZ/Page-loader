@@ -1,9 +1,9 @@
 # -*- coding:utf-8 -*-
-import pytest
 from loader import engine, created, file_conversion
-import tempfile
 import os
 import logging
+import pytest
+import tempfile
 
 
 def check_load_files(site):
@@ -19,12 +19,20 @@ def test_modules():
     assert './static-jquery.html' == created.create_name_file('static/jquery', '.', head=1)
     test_dir = tempfile.TemporaryDirectory()
     name_dir = test_dir.name
-    site = 'https://python-poetry.org/docs/cli/'
+    site = 'https://python-poetry.org'
     new_file = created.page_load(site, created.create_name_file(site, name_dir))
     assert os.path.isfile(new_file) == True
     catalog = created.create_catalog(new_file)
     assert os.path.isdir(catalog) == True
-    items_src = file_conversion.change_html(new_file, catalog, site)
+    items_src = file_conversion.change_html(new_file, catalog)
+    assert ['images/logo-origami.svg',
+            '/images/favicon-origami-32.png',
+            '/css/plugins/bootstrap/bootstrap.min.css',
+            '/css/highlight.css',
+            '/css/global.min.css',
+            '/css/icons.min.css',
+            '/css/fonts.css',
+            '/css/main.css'] == items_src
     file_conversion.files_loader(items_src, catalog, site)
     assert os.listdir(name_dir) == check_load_files(site)
 
