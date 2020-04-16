@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 import pytest
-from loader import engine, created, change_files
+from loader import engine, created, file_conversion
 import tempfile
 import os
 import logging
@@ -24,8 +24,8 @@ def test_modules():
     assert os.path.isfile(new_file) == True
     catalog = created.create_catalog(new_file)
     assert os.path.isdir(catalog) == True
-    items_src = change_files.change_html(new_file, catalog, site)
-    change_files.files_loader(items_src, catalog, site)
+    items_src = file_conversion.change_html(new_file, catalog, site)
+    file_conversion.files_loader(items_src, catalog, site)
     assert os.listdir(name_dir) == check_load_files(site)
 
 
