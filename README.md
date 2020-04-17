@@ -12,4 +12,4 @@
 # Обработка ошибок программы
  <a href="https://asciinema.org/a/320148"><img src="https://asciinema.org/a/lZmJKg3TT3BWqohxSOYhMjJvH.png" width="336"/></a>
 # Отображение процесса загрузки страницы
-<a href="https://asciinema.org/a/320774"><img src="https://asciinema.org/a/lZmJKg3TT3BWqohxSOYhMjJvH.png" width="336"/></a>
+<a href="https://asciinema.org/a/321084"><img src="https://asciinema.org/a/lZmJKg3TT3BWqohxSOYhMjJvH.png" width="336"/></a>
