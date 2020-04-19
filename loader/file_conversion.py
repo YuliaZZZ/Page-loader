@@ -5,7 +5,7 @@ import re
 
 
 def change_html(html_file, catalog):
-    items_src = []
+    items_src = {}
     with open(html_file) as fp:
         soup = BeautifulSoup(fp, 'xml')
         for i in soup.find_all(
@@ -14,21 +14,25 @@ def change_html(html_file, catalog):
                 'link',
                 href=re.compile("^(?!https).+")):
             if i.name == 'script' or i.name == 'img':
-                items_src.append(i['src'])
-                i['src'] = create_name_file(items_src[-1], catalog, head=1)
+                items_src[i['src']] = create_name_file(
+                                                       i['src'],
+                                                       catalog, head=1)
+                i['src'] = items_src[i['src']]
             elif i.name == 'link':
-                items_src.append(i['href'])
-                i['href'] = create_name_file(items_src[-1], catalog, head=1)
+                items_src[i['href']] = create_name_file(
+                                                        i['href'],
+                                                        catalog, head=1)
+                i['href'] = items_src[i['href']]
     text = str(soup)
     with open(html_file, 'w') as fp:
         fp.write(text)
     return items_src
 
 
-def files_loader(items_src, catalog, site):
-    if items_src != []:
-        for i in items_src:
+def files_loader(items_src, site):
+    if len(items_src) > 0:
+        for links, names_files in items_src.items():
             page_load(
-                site + os.path.normpath('/' + i),
-                create_name_file(i, catalog, head=1))
+                site + os.path.normpath('/' + links),
+                names_files)
     return items_src

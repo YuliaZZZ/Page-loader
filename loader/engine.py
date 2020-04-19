@@ -44,7 +44,7 @@ def app(site, way):
     items_src = change_html(file_html, catalog)
     logger.info('HTML changed!')
     try:
-        files_loader(items_src, catalog, site)
+        files_loader(items_src, site)
         spinner.next()
     except MemoryError as e:         # pragma: no cover
         logger.debug(sys.exc_info()[:2])

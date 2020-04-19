@@ -6,6 +6,16 @@ import pytest
 import tempfile
 
 
+links_dict = {'images/logo-origami.svg': 'python-poetry-org_files/images-logo-origami.svg',
+              '/images/favicon-origami-32.png': 'python-poetry-org_files/images-favicon-origami-32.png',
+              '/css/plugins/bootstrap/bootstrap.min.css': 'python-poetry-org_files/css-plugins-bootstrap-bootstrap-min.css',
+              '/css/highlight.css': 'python-poetry-org_files/css-highlight.css',
+              '/css/global.min.css': 'python-poetry-org_files/css-global-min.css',
+              '/css/icons.min.css': 'python-poetry-org_files/css-icons-min.css',
+              '/css/fonts.css': 'python-poetry-org_files/css-fonts.css',
+              '/css/main.css': 'python-poetry-org_files/css-main.css'}
+
+
 def check_load_files(site):
     fd = tempfile.TemporaryDirectory()
     dir_name = fd.name
@@ -25,15 +35,8 @@ def test_modules():
     catalog = created.create_catalog(new_file)
     assert os.path.isdir(catalog) == True
     items_src = file_conversion.change_html(new_file, catalog)
-    assert ['images/logo-origami.svg',
-            '/images/favicon-origami-32.png',
-            '/css/plugins/bootstrap/bootstrap.min.css',
-            '/css/highlight.css',
-            '/css/global.min.css',
-            '/css/icons.min.css',
-            '/css/fonts.css',
-            '/css/main.css'] == items_src
-    file_conversion.files_loader(items_src, catalog, site)
+    assert links_dict.keys() == items_src.keys()
+    file_conversion.files_loader(items_src, site)
     assert os.listdir(name_dir) == check_load_files(site)
 
 
