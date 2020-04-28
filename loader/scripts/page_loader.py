@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
-from loader import start_loader, engine
-import sys
 import logging
+import sys
+
+from loader import argparser, process
 
 
 class SomeException(Exception):   # pragma: no cover
@@ -13,7 +14,12 @@ logger.setLevel(logging.DEBUG)
 
 
 def main():    # pragma: no cover
-    site, way, logslevel = start_loader.start()
+    site, way, logslevel = argparser.arg_parse()
+    console = logging.StreamHandler()
+    console.setLevel(logging.ERROR)
+    formatter_console = logging.Formatter('%(message)s')
+    console.setFormatter(formatter_console)
+    logger.addHandler(console)
     f = logging.FileHandler('logsapp.log')
     f.setLevel(logslevel)
     formatter = logging.Formatter(
@@ -21,18 +27,13 @@ def main():    # pragma: no cover
         )
     f.setFormatter(formatter)
     logger.addHandler(f)
-    console = logging.StreamHandler()
-    console.setLevel(logging.ERROR)
-    formatter_console = logging.Formatter('%(message)s')
-    console.setFormatter(formatter_console)
-    logger.addHandler(console)
     try:
-        engine.app(site, way)
+        process.app(site, way)
     except SomeException:
         sys.exit(1)
     else:
         sys.exit(0)
 
 
-if __name__ == '__main__':   # pragma: no cover
+if __name__ == '__main__':    # pragma: no cover
     main()
