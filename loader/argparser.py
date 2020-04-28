@@ -1,6 +1,7 @@
 import argparse
 import logging
 
+
 [DEBUG, INFO, WARNING, ERROR, CRITICAL] = ['debug', 'info',
                                            'warning', 'error',
                                            'critical']
