@@ -6,7 +6,7 @@ import tempfile
 import pytest
 
 from loader import argparser, filesmaker, nameholder, process
-from loader.scripts.page_loader import logger, SomeException
+from loader.scripts.page_loader import SomeException, logger
 
 
 def readed(file):

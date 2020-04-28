@@ -26,12 +26,13 @@ def write_cont(content, file_):
         return file_
     raise SomeException()
 
+
 def download_page(site):
     try:
         r = requests.get(site)
     except (requests.exceptions.InvalidSchema,
             requests.exceptions.InvalidURL,
-             requests.exceptions.MissingSchema) as e:
+            requests.exceptions.MissingSchema) as e:
         logger.debug(sys.exc_info()[:2])
         logger.error('Ошибка параметров запроса.')
         raise SomeException() from e
@@ -84,7 +85,7 @@ def files_loader(items_src):
     for (links, names_files) in items_src:
         try:
             write_cont(download_page(links), names_files)
-        except requests.exceptions.Timeout as e:   # pragma: no cover
+        except requests.exceptions.Timeout:   # pragma: no cover
             logger.debug(sys.exc_info()[:2])
             logger.error('Истекло время ожидания ответа.')
             continue

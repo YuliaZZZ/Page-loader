@@ -1,4 +1,3 @@
-from loader import argparser, nameholder, process, filesmaker
-
+from loader import argparser, filesmaker, nameholder, process
 
 __all__ = ('argparser', 'nameholder', 'process', 'filesmaker')

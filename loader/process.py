@@ -1,4 +1,5 @@
-from loader.filesmaker import create_directory, download_page, files_loader, make_localsite
+from loader.filesmaker import (create_directory, download_page, files_loader,
+                               make_localsite)
 from loader.nameholder import make_directname, make_filename
 from loader.scripts.page_loader import logger
 
