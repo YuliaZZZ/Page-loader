@@ -6,7 +6,7 @@ import tempfile
 import pytest
 
 from loader import argparser, filesmaker, nameholder, process
-from loader.scripts.page_loader import SomeException, logger
+from loader.scripts.page_loader import logger, SomeException
 
 
 def readed(file):
@@ -82,4 +82,4 @@ def test_exceptions():
         with pytest.raises(SomeException) as excinfo:
             filesmaker.download_page('https://pyon-poetry.org')
         with pytest.raises(SomeException) as excinfo:
-            filesmaker.write_cont(filesmaker.download_page('https://httpbin.org/status/404'), './t_file')
+            filesmaker.write_cont(filesmaker.download_page('https://httpbin.org/status/400'), './t_file')

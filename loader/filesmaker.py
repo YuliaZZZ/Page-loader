@@ -11,8 +11,11 @@ from loader.nameholder import make_filename
 from loader.scripts.page_loader import SomeException, logger
 
 
-def write_cont(content, file_):
-    bar = ShadyBar('Loading', suffix='%(percent)d%%')
+def write_cont(content, file_, show_progr=False):
+    if show_progr is True:
+        bar = ShadyBar('Loading', suffix='%(percent)d%%')
+    else:
+        bar = Passclass()
     if content:
         try:
             with open(file_, 'w') as fd:
@@ -41,7 +44,7 @@ def download_page(site):
         logger.error(
             'Несуществующий адрес сайта либо ошибка подключения.')
         raise SomeException() from e
-    if r.status_code in list(range(400, 501)):
+    if r.status_code in [400, 403, 404, 410, 500, 503]:
         logger.error('Страница не отвечает.')
     content = r.text
     return content
@@ -81,10 +84,19 @@ def make_localsite(content, htmlfile_name, site, directory):
     return items_src
 
 
-def files_loader(items_src):
+class Passclass(object):
+    def __init__(self):
+        self.hing = None
+    def next(self):
+        pass
+    def finish(self):
+        pass
+
+
+def files_loader(items_src, show_progr=False):
     for (links, names_files) in items_src:
         try:
-            write_cont(download_page(links), names_files)
+            write_cont(download_page(links), names_files, show_progr)
         except requests.exceptions.Timeout:   # pragma: no cover
             logger.debug(sys.exc_info()[:2])
             logger.error('Истекло время ожидания ответа.')

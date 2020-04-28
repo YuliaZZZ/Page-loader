@@ -13,5 +13,5 @@ def app(site, directory):
     logger.info('Directory created.')
     items_src = make_localsite(content, file_html, site, new_directory)
     logger.info('The content changed and saved in file.')
-    files_loader(items_src)
+    files_loader(items_src, show_progr=True)
     logger.info('All files uploaded. The end.')
