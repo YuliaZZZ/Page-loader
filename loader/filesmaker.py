@@ -87,8 +87,10 @@ def make_localsite(content, htmlfile_name, site, directory):
 class Passclass(object):
     def __init__(self):
         self.hing = None
+
     def next(self):
         pass
+
     def finish(self):
         pass
 
