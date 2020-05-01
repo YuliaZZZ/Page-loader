@@ -2,6 +2,7 @@ import os
 import os.path
 import re
 import sys
+import urllib.parse
 
 import requests
 from bs4 import BeautifulSoup
@@ -44,8 +45,12 @@ def download_page(site):
         logger.error(
             'Несуществующий адрес сайта либо ошибка подключения.')
         raise SomeException() from e
-    if r.status_code in [400, 403, 404, 410, 500, 503]:
-        logger.error('Страница не отвечает.')
+    if r.status_code in list(range(400, 500)):
+        logger.error('Страница не существует.')
+        raise SomeException()
+    elif r.status_code in list(range(500, 511)):
+        logger.error('Сервер не отвечает.')
+        raise SomeException()
     content = r.text
     return content
 
@@ -71,13 +76,12 @@ def make_localsite(content, htmlfile_name, site, directory):
               href=re.compile("^(?!https).+")):
         if i.name == 'link':
             file_name = make_filename(i['href'], directory, headfile_ex=1)
-            items_src.append((site + os.path.normpath('/' + i['href']),
+            items_src.append((urllib.parse.urljoin(site, i['href']),
                               file_name))
             i['href'] = file_name
         else:
             file_name = make_filename(i['src'], directory, headfile_ex=1)
-            items_src.append((site + os.path.normpath('/' + i['src']),
-                              file_name))
+            items_src.append((urllib.parse.urljoin(site, i['src']), file_name))
             i['src'] = file_name
     text = str(soup)
     write_cont(text, htmlfile_name)

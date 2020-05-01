@@ -2,6 +2,7 @@
 import logging
 import os
 import tempfile
+import urllib.parse
 
 import pytest
 
@@ -56,11 +57,11 @@ def test_filesmaker():
         t_direct = filesmaker.create_directory(tmpdir + '/yuliazzz-github-io-site_for_testing-_files')
         assert os.path.isdir(t_direct) == True
         url_list = [
-            (url + os.path.normpath('/' + './chef&cooking.jpg'), t_direct + '/chef-cooking.jpg'),
-            (url + os.path.normpath('/' +
+            (urllib.parse.urljoin(url, './chef&cooking.jpg'), t_direct + '/chef-cooking.jpg'),
+            (urllib.parse.urljoin(url,
                 '/site_for_testing/assets/css/style.css?v=3a1cae6e260fc3026c0093222f0708050a6c11ca'),
              t_direct + '/site_for_testing-assets-css-style.css?v=3a1cae6e260fc3026c0093222f0708050a6c11ca'),
-            (url + os.path.normpath('/' + './chocolate cake.html'), t_direct + '/chocolate-cake.html')]
+            (urllib.parse.urljoin(url, './chocolate cake.html'), t_direct + '/chocolate-cake.html')]
         assert filesmaker.make_localsite(text, new_file, url, t_direct) == url_list
         assert readed(new_file) is not readed('./tests/fixtures/example_site.html')
         filesmaker.files_loader(url_list)
@@ -83,3 +84,5 @@ def test_exceptions():
             filesmaker.download_page('https://pyon-poetry.org')
         with pytest.raises(SomeException) as excinfo:
             filesmaker.write_cont(filesmaker.download_page('https://httpbin.org/status/400'), './t_file')
+        with pytest.raises(SomeException) as excinfo:
+            filesmaker.write_cont(filesmaker.download_page('https://httpbin.org/status/503'), './t_file')
