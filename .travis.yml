@@ -12,7 +12,6 @@ before_install:
   - pip3 install poetry
   - pip3 install pytest
   - pip3 install coverage
-  - pip3 install lxml
 
 before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter

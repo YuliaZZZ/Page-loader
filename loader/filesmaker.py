@@ -17,18 +17,16 @@ def write_cont(content, file_, show_progr=False):
         bar = ShadyBar('Loading', suffix='%(percent)d%%')
     else:
         bar = Passclass()
-    if content:
-        try:
-            with open(file_, 'w') as fd:
-                fd.write(content)
-                bar.next()
-            bar.finish()
-        except FileNotFoundError as e:
-            logger.debug(sys.exc_info()[:2])
-            logger.error("Указанный каталог не существует.")
-            raise SomeException() from e
-        return file_
-    raise SomeException()
+    try:
+        with open(file_, 'w') as fd:
+            fd.write(content)
+            bar.next()
+        bar.finish()
+    except FileNotFoundError as e:
+        logger.debug(sys.exc_info()[:2])
+        logger.error("Указанный каталог не существует.")
+        raise SomeException() from e
+    return file_
 
 
 def download_page(site):
