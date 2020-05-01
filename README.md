@@ -10,6 +10,6 @@
 ## Choosing the level of details of the program logation
 <a href="https://asciinema.org/a/317251"><img src="https://asciinema.org/a/lZmJKg3TT3BWqohxSOYhMjJvH.png" width="336"/></a>
 ## Processing program errors
- <a href="https://asciinema.org/a/320148"><img src="https://asciinema.org/a/lZmJKg3TT3BWqohxSOYhMjJvH.png" width="336"/></a>
+ <a href="https://asciinema.org/a/325977"><img src="https://asciinema.org/a/lZmJKg3TT3BWqohxSOYhMjJvH.png" width="336"/></a>
 ## Show the resource loading process
-<a href="https://asciinema.org/a/321084"><img src="https://asciinema.org/a/lZmJKg3TT3BWqohxSOYhMjJvH.png" width="336"/></a>
+<a href="https://asciinema.org/a/325974"><img src="https://asciinema.org/a/lZmJKg3TT3BWqohxSOYhMjJvH.png" width="336"/></a>
