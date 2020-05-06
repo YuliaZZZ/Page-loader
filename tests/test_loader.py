@@ -43,7 +43,7 @@ URL = 'https://yuliazzz.github.io/python-project-lvl3/'
 logger = setup_log(logging.DEBUG)
 DIRECTORY_NAME = '/yuliazzz-github-io-python-project-lvl3-_files'
 CONTENT1 = "./chef&cooking.jpg"
-CONTENT2 = '/python-project-lvl3/assets/css/style.css?v=4007464942a0d8629a02c210825bb9abd5bf3413'
+CONTENT2 = '/python-project-lvl3/assets/css/style.css?v=2ad1590f993c20d93d75d2a72af799df6881536a'
 CONTENT3 = './chocolate cake.html'
 EXAMPLE_SITE = './tests/fixtures/example_site.html'
 
