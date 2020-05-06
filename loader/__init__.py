@@ -1,4 +1,4 @@
-from loader import argparser, nameholder, process, filesmaker
+from loader import files_creator, log, names_creator, process
 
 
-__all__ = ('argparser', 'nameholder', 'process', 'filesmaker')
+__all__ = ('files_creator', 'log', 'names_creator', 'process')

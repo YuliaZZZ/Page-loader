@@ -1,17 +1,45 @@
-from loader.filesmaker import (create_directory, download_page, files_loader,
-                               make_localsite)
-from loader.nameholder import make_directname, make_filename
-from loader.scripts.page_loader import logger
+import os
+import sys
+import time
+
+from progress.bar import ShadyBar
+
+from loader.files_creator import (download_page, make_local_site,
+                                  write_in_file)
+from loader.log import SomeException
+from loader.names_creator import make_directoryname, make_filename
 
 
-def app(site, directory):
-    logger.info('Start program.')
-    content = download_page(site)
-    logger.info('Page uploaded.')
-    file_html = make_filename(site, directory)
-    new_directory = create_directory(make_directname(file_html))
-    logger.info('Directory created.')
-    items_src = make_localsite(content, file_html, site, new_directory)
-    logger.info('The content changed and saved in file.')
-    files_loader(items_src, show_progr=True)
+def create_directory(name_directory, logger):
+    try:
+        os.mkdir(name_directory, mode=0o700, dir_fd=None)
+    except PermissionError as e:
+        logger.debug(sys.exc_info()[:2])
+        logger.error('Нет прав на внесение изменений.')
+        raise SomeException() from e
+    return str(name_directory)
+
+
+def make_loader(site, directory, logger):
+    for i in ShadyBar('Loading').iter(range(1)):
+        time.sleep(0.1)
+        logger.info('Start program.')
+        content = download_page(site, logger)
+        logger.info('Page uploaded.')
+        file_html = make_filename(site, directory)
+        new_directory = create_directory(
+                      make_directoryname(file_html), logger)
+        logger.info('Directory created.')
+        new_content, items_src = make_local_site(content,
+                                                 file_html, site,
+                                                 new_directory,
+                                                 logger)
+        logger.info('The content changed.')
+        write_in_file(new_content, file_html, logger)
+        logger.info('The changed content saved in file.')
+    for i in ShadyBar('Loading').iter(items_src):
+        time.sleep(0.1)
+        for (link, file_n) in items_src:
+            write_in_file(download_page(link, logger, main_page=1),
+                          file_n, logger)
     logger.info('All files uploaded. The end.')

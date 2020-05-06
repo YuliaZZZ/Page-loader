@@ -15,6 +15,6 @@ def make_filename(site, directory, headfile_ex=0):
     return name_file
 
 
-def make_directname(html_file):
+def make_directoryname(html_file):
     name_directory = html_file.replace('.html', '_files')
     return name_directory
