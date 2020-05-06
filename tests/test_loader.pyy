@@ -74,15 +74,21 @@ def test_filesmaker():
 
 def test_exceptions():
     with tempfile.TemporaryDirectory() as tmpdir:
-        with pytest.raises(SomeException):
-            process.create_directory('/tes', logger)
-        with pytest.raises(SomeException):
+        pytest.raises(PermissionError, process.create_directory, '/python-poetry_files', logger)
+        @pytest.mark.xfail(raises=PermissionError)
+        def test_f1():
+            process.create_directory('/python-poetry_files', logger)
+        @pytest.mark.xfail(raises=FileNotFoundError)
+        def test_f2():
             files_creator.write_in_file(CONTENT, './godzilla/pp.txt', logger)
-        with pytest.raises(SomeException):
+        @pytest.mark.xfail(raises=requests.exceptions.InvalidSchema)
+        def test_f3():
             files_creator.download_page('htts://python-poetry.org', logger)
-        with pytest.raises(SomeException):
+        @pytest.mark.xfail(raises=requests.exceptions.MissingSchema)
+        def test_f4():
             files_creator.download_page('https:python-poetry.org', logger)
-        with pytest.raises(SomeException):
+        @pytest.mark.xfail(raises=requests.exceptions.ConnectionError)
+        def test_f5():
             files_creator.download_page('https://pyon-poetry.org', logger)
         with pytest.raises(SomeException):
             files_creator.download_page('https://httpbin.org/status/404', logger)
