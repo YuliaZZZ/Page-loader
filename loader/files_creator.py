@@ -57,7 +57,7 @@ def give_link(tag):
         return tag['src']
 
 
-def make_local_site(content, htmlfile_name, site, directory, logger):
+def make_local_site(content, htmlfile_name, site, directory):
     items_src = []
     soup = BeautifulSoup(content, 'xml')
     file_name = None

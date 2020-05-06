@@ -32,8 +32,7 @@ def make_loader(site, directory, logger):
         logger.info('Directory created.')
         new_content, items_src = make_local_site(content,
                                                  file_html, site,
-                                                 new_directory,
-                                                 logger)
+                                                 new_directory)
         logger.info('The content changed.')
         write_in_file(new_content, file_html, logger)
         logger.info('The changed content saved in file.')

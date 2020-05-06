@@ -59,7 +59,7 @@ def test_filesmaker():
                 '/site_for_testing/assets/css/style.css?v=3a1cae6e260fc3026c0093222f0708050a6c11ca'),
              t_direct + '/site_for_testing-assets-css-style.css?v=3a1cae6e260fc3026c0093222f0708050a6c11ca'),
             (urllib.parse.urljoin(URL, './chocolate cake.html'), t_direct + '/chocolate-cake.html')]
-        new_text, url_src = files_creator.make_local_site(text, new_file, URL, t_direct, logger)
+        new_text, url_src = files_creator.make_local_site(text, new_file, URL, t_direct)
         assert url_src == url_list
         files_creator.write_in_file(new_text, new_file, logger)
         assert readed(new_file) is not readed('./tests/fixtures/example_site.html')
