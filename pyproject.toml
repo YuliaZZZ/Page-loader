@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "YuliaZZZ_Page_Loader"
-version = "0.7.4"
+version = "0.7.5"
 description = "Page loader"
 classifiers = ["Topic :: Utilities"]
 authors = ["Zula <zinowiewa@yandex.ru>"]

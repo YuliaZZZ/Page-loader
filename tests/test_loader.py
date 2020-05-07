@@ -42,9 +42,8 @@ CONTENT = 'TEXT'
 URL = 'https://yuliazzz.github.io/python-project-lvl3/'
 logger = setup_log(logging.DEBUG)
 DIRECTORY_NAME = '/yuliazzz-github-io-python-project-lvl3-_files'
-CONTENT1 = "./chef&cooking.jpg"
-CONTENT2 = '/python-project-lvl3/assets/css/style.css?v=2ad1590f993c20d93d75d2a72af799df6881536a'
-CONTENT3 = './chocolate cake.html'
+CONTENT1 = "./chef.cooking.jpg"
+CONTENT2 = './chocolate cake.html'
 EXAMPLE_SITE = './tests/fixtures/example_site.html'
 
 
@@ -57,9 +56,8 @@ def test_filesmaker():
         t_direct = process.create_directory(tmpdir + DIRECTORY_NAME, logger)
         assert os.path.isdir(t_direct) is True
         url_list = [
-            (urllib.parse.urljoin(URL, CONTENT1), names_creator.make_filename(CONTENT1, t_direct, headfile_ex=1)),
-            (urllib.parse.urljoin(URL, CONTENT2), names_creator.make_filename(CONTENT2, t_direct, headfile_ex=1)),
-            (urllib.parse.urljoin(URL, CONTENT3), names_creator.make_filename(CONTENT3, t_direct, headfile_ex=1))]
+            (urllib.parse.urljoin(URL, CONTENT1), t_direct + '/chef-cooking.jpg'),
+            (urllib.parse.urljoin(URL, CONTENT2), t_direct + '/chocolate-cake.html')]
         new_text, url_src = files_creator.make_local_site(text, new_file, URL, t_direct)
         assert url_src == url_list
         files_creator.write_in_file(new_text, new_file, logger)
@@ -75,16 +73,19 @@ def test_filesmaker():
 def test_exceptions():
     with tempfile.TemporaryDirectory() as tmpdir:
         with pytest.raises(SomeException):
-            process.create_directory('/tes', logger)
+            process.create_directory('/tes', logger)                          # Testing PermissionError
         with pytest.raises(SomeException):
-            files_creator.write_in_file(CONTENT, './godzilla/pp.txt', logger)
+            files_creator.write_in_file(CONTENT, './godzilla/pp.txt', logger)  # Testing FileNotFoundError
         with pytest.raises(SomeException):
-            files_creator.download_page('htts://python-poetry.org', logger)
+            files_creator.download_page('htts://python-poetry.org', logger)    # Testing
+                                                                               # requests.exceptions.InvalidSchema
         with pytest.raises(SomeException):
-            files_creator.download_page('https:python-poetry.org', logger)
+            files_creator.download_page('https:python-poetry.org', logger)     # Testing
+                                                                               # requests.exceptions.MissingSchema
         with pytest.raises(SomeException):
-            files_creator.download_page('https://pyon-poetry.org', logger)
+            files_creator.download_page('https://pyon-poetry.org', logger)     # Testing
+                                                                               # requests.exceptions.ConnectionError
         with pytest.raises(SomeException):
-            files_creator.download_page('https://httpbin.org/status/404', logger)
+            files_creator.download_page('https://httpbin.org/status/404', logger)  # Testing invalid response
         with pytest.raises(SomeException):
             files_creator.download_page('https://httpbin.org/status/503', logger)

@@ -1,12 +1,17 @@
 import os.path
 import re
+import urllib
 
 
 def make_filename(site, directory, headfile_ex=0):
-    host = re.split(r'://|^\W+', site)
-    hostname, postfix = os.path.splitext(host[-1])
+    parts_url = urllib.parse.urlparse(site)
+    if headfile_ex == 0:
+        host = parts_url.netloc + parts_url.path
+    else:
+        host = re.split(r'^\W+', parts_url.path)[-1]
+    hostname, postfix = os.path.splitext(host)
     if headfile_ex == 0 and postfix != 'html':
-        hostname = host[-1]
+        hostname = host
         postfix = '.html'
     elif headfile_ex == 1 and postfix == '':
         postfix = '.html'

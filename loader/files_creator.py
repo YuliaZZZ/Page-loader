@@ -39,22 +39,21 @@ def download_page(site, logger, main_page=0):
         if main_page == 0:
             raise SomeException() from e
     if r.status_code in range(400, 500):
-        logger.error('Страница не существует.')
+        logger.debug('Страница не существует.')
         if main_page == 0:
+            logger.error('Страница не существует.')
             raise SomeException()
     elif r.status_code in range(500, 511):
-        logger.error('Сервер не отвечает.')
+        logger.debug('Сервер не отвечает.')
         if main_page == 0:
+            logger.error('Сервер не отвечает.')
             raise SomeException()
     content = r.text
     return content
 
 
 def give_link(tag):
-    if 'href' in tag.attrs:
-        return tag['href']
-    else:
-        return tag['src']
+    return tag['href'] if 'href' in tag.attrs else tag['src']
 
 
 def make_local_site(content, htmlfile_name, site, directory):
@@ -65,7 +64,8 @@ def make_local_site(content, htmlfile_name, site, directory):
                            src=LOCAL_PAGE) + soup.find_all(
                                'link', href=LOCAL_PAGE):
         file_name = make_filename(give_link(i), directory, headfile_ex=1)
-        items_src.append((urllib.parse.urljoin(site, give_link(i)), file_name))
+        items_src.append((urllib.parse.urljoin(site, give_link(i)),
+                          file_name))
         if 'href' in i.attrs:
             i['href'] = file_name
         else:
