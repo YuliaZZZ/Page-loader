@@ -5,7 +5,7 @@ lint:
 	@poetry run flake8 loader
 
 test:
-	@poetry run pytest --cov --cov-report xml tests/
+	@poetry run pytest --cov=loader --cov-report xml tests/
 
 public:
 	@poetry build

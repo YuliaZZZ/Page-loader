@@ -1,28 +1,29 @@
 #!/usr/bin/env python3
-import argparse
-import sys
+import argparse  # pragma: no cover
+import sys  # pragma: no cover
 
 from loader.log import (SomeException, setup_log, transform,
-                        DEBUG, INFO, WARNING, ERROR, CRITICAL)
-from loader.process import make_loader
+                        DEBUG, INFO, WARNING, ERROR,
+                        CRITICAL)  # pragma: no cover
+from loader.process import make_loader  # pragma: no cover
 
 
 parser = argparse.ArgumentParser(
-       description='Page loader')
-parser.add_argument('site', type=str)
+       description='Page loader')  # pragma: no cover
+parser.add_argument('site', type=str)  # pragma: no cover
 parser.add_argument(
                     '-o', '--output', type=str, default='.',
-                    help='folder to save page')
+                    help='folder to save page')  # pragma: no cover
 parser.add_argument(
                     '-l', '--log', type=transform,
                     choices=[
                              DEBUG, INFO, WARNING, ERROR,
                              CRITICAL], default=transform(INFO),
-                    help='logs registration level')
-args = parser.parse_args()
-logslevel = args.log
-site = args.site
-directory = args.output
+                    help='logs registration level')  # pragma: no cover
+args = parser.parse_args()  # pragma: no cover
+logslevel = args.log  # pragma: no cover
+site = args.site  # pragma: no cover
+directory = args.output  # pragma: no cover
 
 
 def main():    # pragma: no cover
