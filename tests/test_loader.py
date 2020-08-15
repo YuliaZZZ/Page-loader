@@ -39,9 +39,9 @@ def test_nameholder():
 
 
 CONTENT = 'TEXT'
-URL = 'https://yuliazzz.github.io/python-project-lvl3/'
+URL = 'https://yuliazzz.github.io/Page-loader/'
 logger = setup_log(logging.DEBUG)
-DIRECTORY_NAME = '/yuliazzz-github-io-python-project-lvl3-_files'
+DIRECTORY_NAME = '/yuliazzz-github-io-Page-loader-_files'
 CONTENT1 = "./chef.cooking.jpg"
 CONTENT2 = './chocolate cake.html'
 EXAMPLE_SITE = './tests/fixtures/example_site.html'
